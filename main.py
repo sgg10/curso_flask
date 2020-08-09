@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length
+import unittest
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -16,6 +17,11 @@ class LoginForm(FlaskForm):
   username = StringField('Nombre de usuario', validators=[DataRequired(), Length(min=5, max=30)])
   password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
   submit = SubmitField('Enviar')
+
+@app.cli.command()
+def test():
+  tests = unittest.TestLoader().discover('tests')
+  unittest.TextTestRunner().run(tests)
 
 @app.errorhandler(500)
 def internal_server_error(error):
