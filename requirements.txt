@@ -5,4 +5,4 @@ Jinja2
 MarkupSafe
 Werkzeug
 flask-bootstrap
-secrets
+flask-wtf
